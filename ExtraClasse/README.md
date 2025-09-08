@@ -1,5 +1,11 @@
 # ExtraClasse
 
+![React](https://img.shields.io/badge/React-18.2%2B-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.2%2B-3178C6?style=for-the-badge&logo=typescript)
+![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
+
 ## Descrição
 Um site que tem por objetivo unificar a oferta e procura de atividades acadêmicas extracurriculares desenvolvidas na universidade (IC's, monitorias, tutorias, projetos de extensão). Trabalho realizado para a disciplina de Engenharia de Software II
 
