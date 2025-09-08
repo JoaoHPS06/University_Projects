@@ -16,7 +16,7 @@ O objetivo é mostrar minhas experiências acadêmicas e práticas em programaç
 
 ### 🔹 [ExtraClasse](./ExtraClasse)
 Projeto acadêmico em grupo para unificar a oferta e procura de atividades extracurriculares na universidade.  
-**Tecnologias:** React, Typescript, Django com Python 
+**Tecnologias:** React, Typescript, Django, Python 
 
 ---
 
