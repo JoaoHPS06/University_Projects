@@ -5,10 +5,6 @@
 
 Um projeto acadêmico de Redes de Computadores que implementa um protocolo de transferência de arquivos (FTP) simplificado, construído do zero sobre o protocolo UDP, com uma interface gráfica para cliente e servidor.
 
-### Demonstração Animada
-
-![Demo do MyFTP](caminho/para/seu/gif_demo.gif)
-
 ## Visão Geral do Projeto
 
 O MyFTP foi desenvolvido como trabalho prático para a disciplina de Redes de Computadores. O principal objetivo era construir um sistema cliente-servidor para transferência de arquivos que não utilizasse a confiabilidade do protocolo TCP. Em vez disso, o desafio central foi implementar uma camada de confiabilidade sobre o **UDP (User Datagram Protocol)**, que é inerentemente não confiável e não orientado à conexão.
