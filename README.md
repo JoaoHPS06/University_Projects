@@ -1,4 +1,4 @@
-# Portfólio Acadêmico – João Henrique
+# Portfólio Acadêmico – João Henrique Pedrosa
 
 Bem-vindo ao meu portfólio! Aqui estão alguns dos trabalhos e projetos que desenvolvi durante minha graduação em **Ciência da Computação** na UFOP.  
 O objetivo é mostrar minhas experiências acadêmicas e práticas em programação, redes e desenvolvimento de sistemas.
@@ -14,21 +14,21 @@ O objetivo é mostrar minhas experiências acadêmicas e práticas em programaç
 
 ## 📂 Projetos Acadêmicos
 
-### 🔹 [MyFTP](./MyFTP)
-Implementação de um Protocolo UDP em Python com múltiplas threads.  
-**Tecnologias:** Python, Sockets, Threads  
+### 🔹 [ExtraClasse](./ExtraClasse)
+Projeto acadêmico em grupo para unificar a oferta e procura de atividades extracurriculares na universidade.  
+**Tecnologias:** React, Typescript, Django com Python 
 
 ---
 
 ### 🔹 [GerenciamentoDados](./GerenciamentoDados)
 Implementação de um Sistema de Gerenciamento de Projetos Acadêmicos em Python e SQL.  
-**Tecnologias:** SQL, Python  
+**Tecnologias:** SQL, Python 
 
 ---
 
-### 🔹 [ExtraClasse](./ExtraClasse)
-Projeto acadêmico em grupo para unificar a oferta e procura de atividades extracurriculares na universidade.  
-**Tecnologias:** React, Typescript, Python com Django  
+### 🔹 [MyFTP](./MyFTP)
+Implementação de um Protocolo UDP em Python com múltiplas threads.  
+**Tecnologias:** Python, Sockets, Threads  
 
 ---
 
