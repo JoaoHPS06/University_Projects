@@ -1,5 +1,9 @@
 # Gerador de Mapas com Backtracking para Jogo 2D
 
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![PyGame](https://img.shields.io/badge/PyGame-2.5%2B-blue?style=for-the-badge&logo=python)
+![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
+
 Este projeto apresenta um gerador de mapas para um jogo 2D de exploração RPG, desenvolvido como parte da disciplina de Inteligência Artificial. A principal característica deste sistema é o uso de um algoritmo de backtracking para garantir que cada mapa gerado processualmente seja não apenas aleatório, mas também válido, jogável e justo, de acordo com um conjunto de regras predefinidas.
 
 <div align="center">
