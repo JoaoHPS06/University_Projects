@@ -20,7 +20,7 @@ Implementação de um Protocolo UDP em Python com múltiplas threads.
 
 ---
 
-### 🔹 [GerenciamentoDados](./GerenciamentosDados)
+### 🔹 [GerenciamentoDados](./GerenciamentoDados)
 Implementação de um Sistema de Gerenciamento de Projetos Acadêmicos em Python e SQL.  
 **Tecnologias:** SQL, Python  
 
