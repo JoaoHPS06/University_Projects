@@ -35,7 +35,7 @@ Desde sua criação em 2013, o evento busca integrar profissionais e estudantes 
 
 ## 📸 Galeria de imagens
 
-> 🔍 As imagens completas estão disponíveis na pasta [screenshots/](./screenshots).
+> 🔍 As imagens completas estão disponíveis na pasta [screenshots/](./screenshots)
 
 ## 🌍 Link do site
 
