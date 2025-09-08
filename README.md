@@ -6,7 +6,7 @@ O objetivo é mostrar minhas experiências acadêmicas e práticas em programaç
 ---
 
 ## 📌 Sobre mim
-- 🎓 Estudante de Ciência da Computação (5º período – UFOP)  
+- 🎓 Estudante de Ciência da Computação (6º período – UFOP)  
 - 💻 Interesse em **Engenharia de Software, Inteligência Artificial e Ciência de Dados**  
 - 🌍 Aberto a oportunidades de estágio para aplicar e expandir meus conhecimentos  
 
@@ -14,14 +14,14 @@ O objetivo é mostrar minhas experiências acadêmicas e práticas em programaç
 
 ## 📂 Projetos Acadêmicos
 
-### 🔹 [TP-Redes](./TP-Redes)
-Implementação em Python de conceitos fundamentais de Redes de Computadores.  
-**Tecnologias:** Python, Sockets  
+### 🔹 [MyFTP](./MyFTP)
+Implementação de um Protocolo UDP em Python com múltiplas threads.  
+**Tecnologias:** Python, Sockets, Threads  
 
 ---
 
-### 🔹 [TP-BD1](./TP-BD)
-Trabalho prático da disciplina **Banco de Dados I**.  
+### 🔹 [GerenciamentoDados](./GerenciamentosDados)
+Implementação de um Sistema de Gerenciamento de Projetos Acadêmicos em Python e SQL.  
 **Tecnologias:** SQL, Python  
 
 ---
