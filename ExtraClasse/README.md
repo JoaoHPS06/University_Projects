@@ -4,6 +4,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.2%2B-3178C6?style=for-the-badge&logo=typescript)
 ![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![SQLite](https://img.shields.io/badge/SQLite-3.45%2B-003B57?style=for-the-badge&logo=sqlite)
 ![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
 
 ## Descrição
