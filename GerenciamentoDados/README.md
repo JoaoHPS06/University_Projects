@@ -1,8 +1,7 @@
 # Sistema de Gerenciamento de Projetos Acadêmicos
 
 ## Visão Geral
-
-[cite_start]Este projeto é um sistema de banco de dados desenvolvido para gerenciar projetos acadêmicos, como Iniciação Científica, Extensão e Monitoria/Tutoria[cite: 11, 13, 16]. [cite_start]A aplicação permite o cadastro e a consulta de informações sobre alunos, professores, departamentos, projetos, oportunidades de vagas e financiadores[cite: 3, 4, 5, 7, 10, 21].
+Este projeto é um sistema de banco de dados desenvolvido para gerenciar projetos acadêmicos, como Iniciação Científica, Extensão e Monitoria/Tutoria. A aplicação permite o cadastro e a consulta de informações sobre alunos, professores, departamentos, projetos, oportunidades de vagas e financiadores. Esse trabalho foi realizado por mim e outros colegas para a disciplina de Banco de Dados.
 
 O sistema possui uma interface gráfica desenvolvida em Python que se conecta a um banco de dados PostgreSQL para realizar consultas e operações, como listar projetos, inscrever alunos, aprovar candidaturas e visualizar relatórios sobre vagas e contribuições financeiras.
 
@@ -27,14 +26,14 @@ O diagrama completo está disponível no arquivo `Esquema Conceitual.xml`.
 
 A partir do modelo conceitual, foi derivado o esquema relacional, que define a estrutura das tabelas, seus atributos, chaves primárias e estrangeiras. As principais relações (tabelas) são:
 
-* [cite_start]**Aluno**: Armazena dados dos estudantes[cite: 3].
-* [cite_start]**Professor**: Guarda informações dos professores e seu departamento de alocação[cite: 4].
-* [cite_start]**Departamento**: Tabela com os departamentos da instituição[cite: 5].
-* [cite_start]**Projeto**: Tabela central que armazena todos os projetos, com especializações para **ProjetodeExtensao**, **MonitoriaTutoria** e **IniciacaoCient**[cite: 10, 11, 13, 16].
-* [cite_start]**Oportunidade**: Define as vagas disponíveis nos projetos, podendo ser uma **OportunidadeRemunerada**[cite: 21, 23].
-* [cite_start]**Inscreve**: Tabela associativa que registra a inscrição de um aluno em uma oportunidade[cite: 32].
-* [cite_start]**Financiador** e **Contribuicao**: Gerenciam as entidades que financiam os projetos e os valores contribuídos[cite: 7, 18].
-* [cite_start]**Coordena**: Associa os professores que coordenam cada projeto[cite: 34].
+* **Aluno**: Armazena dados dos estudantes.
+* **Professor**: Guarda informações dos professores e seu departamento de alocação.
+* **Departamento**: Tabela com os departamentos da instituição.
+* **Projeto**: Tabela central que armazena todos os projetos, com especializações para **ProjetodeExtensao**, **MonitoriaTutoria** e **IniciacaoCient**.
+* **Oportunidade**: Define as vagas disponíveis nos projetos, podendo ser uma **OportunidadeRemunerada**.
+* **Inscreve**: Tabela associativa que registra a inscrição de um aluno em uma oportunidade.
+* **Financiador** e **Contribuicao**: Gerenciam as entidades que financiam os projetos e os valores contribuídos.
+* **Coordena**: Associa os professores que coordenam cada projeto.
 
 O detalhamento completo pode ser encontrado no arquivo `Esquema Relacional.pdf`.
 
@@ -71,7 +70,7 @@ Para executar este projeto, siga os passos abaixo:
 * PostgreSQL instalado e em execução.
 
 ### 2. Configuração do Banco de Dados
-1.  Crie um banco de dados em seu servidor PostgreSQL. Você pode usar o nome `postgres` como no script, ou criar um novo (ex: `projetos_academicos`).
+1.  Crie um banco de dados em seu servidor PostgreSQL
 2.  Execute o script `Esquema Físico - SQL.sql` para criar as tabelas e popular o banco com os dados iniciais. Você pode usar um cliente como o DBeaver/pgAdmin ou a linha de comando:
     ```bash
     psql -U seu_usuario -d nome_do_banco -f "Esquema Físico - SQL.sql"
@@ -112,4 +111,5 @@ Para executar este projeto, siga os passos abaixo:
 Com o ambiente configurado e o banco de dados ativo, execute o seguinte comando no terminal:
 
 ```bash
+
 python system.py
