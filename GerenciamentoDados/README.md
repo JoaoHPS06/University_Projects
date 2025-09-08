@@ -1,5 +1,9 @@
 # Sistema de Gerenciamento de Projetos Acadêmicos
 
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-blue?style=for-the-badge&logo=postgresql)
+![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
+
 ## Visão Geral
 Este projeto é um sistema de banco de dados desenvolvido para gerenciar projetos acadêmicos, como Iniciação Científica, Extensão e Monitoria/Tutoria. A aplicação permite o cadastro e a consulta de informações sobre alunos, professores, departamentos, projetos, oportunidades de vagas e financiadores. Esse trabalho foi realizado por mim e outros colegas para a disciplina de Banco de Dados.
 
@@ -113,3 +117,4 @@ Com o ambiente configurado e o banco de dados ativo, execute o seguinte comando 
 ```bash
 
 python system.py
+
