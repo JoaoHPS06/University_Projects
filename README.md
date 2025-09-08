@@ -32,6 +32,18 @@ Implementação de um Protocolo UDP em Python com múltiplas threads.
 
 ---
 
+### 🔹 [Map Generator IA](./MapGeneratorIA)
+Implementação de um gerador de mapas válido para jogos 2D usando algoritmo de backtracking.  
+**Tecnologias:** Python, Pygame 
+
+---
+
+### 🔹 [Site Ercas](./SiteErcas)
+Implementação do site do evento Escola Regional de Computação Aplicada à Saúde 2024.  
+**Tecnologias:** Wordpress  
+
+---
+
 ## 📫 Contato
 - GitHub: [JoaoHPS06](https://github.com/JoaoHPS06)  
 - LinkedIn: *https://www.linkedin.com/in/jo%C3%A3o-henrique-pedrosa-487263296/*  
