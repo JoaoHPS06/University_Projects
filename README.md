@@ -1,52 +1,56 @@
-# Portfólio Acadêmico – João Henrique Pedrosa
+# 📚 Academic Portfolio – João Henrique Pedrosa  
 
-Bem-vindo ao meu portfólio! Aqui estão alguns dos trabalhos e projetos que desenvolvi durante minha graduação em **Ciência da Computação** na UFOP.  
-O objetivo é mostrar minhas experiências acadêmicas e práticas em programação, redes e desenvolvimento de sistemas.
+Welcome to my portfolio!  
+Here you will find some of the projects I developed during my **Computer Science** undergraduate program at UFOP (Federal University of Ouro Preto, Brazil).  
 
----
-
-## 📌 Sobre mim
-- 🎓 Estudante de Ciência da Computação (6º período – UFOP)  
-- 💻 Interesse em **Engenharia de Software, Inteligência Artificial e Ciência de Dados**  
-- 🌍 Aberto a oportunidades de estágio para aplicar e expandir meus conhecimentos  
+The goal of this portfolio is to showcase my **academic** and **practical experience** in programming, networking, and system development.  
 
 ---
 
-## 📂 Projetos Acadêmicos
-
-### 🔹 [ExtraClasse](./ExtraClasse)
-Projeto acadêmico em grupo para unificar a oferta e procura de atividades extracurriculares na universidade.  
-**Tecnologias:** React, Typescript, Django, Python, SQLite 
-
----
-
-### 🔹 [GerenciamentoDados](./GerenciamentoDados)
-Implementação de um Sistema de Gerenciamento de Projetos Acadêmicos em Python e SQL.  
-**Tecnologias:** SQL, Python 
+## 👨‍💻 About Me  
+- 🎓 Computer Science Undergraduate (6th semester – UFOP)  
+- 💻 Interests: **Software Engineering, Artificial Intelligence, Data Science, and Extended Reality (XR)**  
+- 🌍 Open to **international internship opportunities** to apply and expand my knowledge  
 
 ---
 
-### 🔹 [MyFTP](./MyFTP)
-Implementação de um Protocolo UDP em Python com múltiplas threads.  
-**Tecnologias:** Python, Sockets, Threads  
+## 📂 Academic Projects  
+
+### 🔹 [ExtraClasse](./ExtraClasse)  
+Group academic project to unify the supply and demand of extracurricular activities at the university.  
+**Technologies:** React, TypeScript, Django, Python, SQLite  
 
 ---
 
-### 🔹 [Map Generator IA](./MapGeneratorIA)
-Implementação de um gerador de mapas válido para jogos 2D usando algoritmo de backtracking.  
-**Tecnologias:** Python, Pygame 
+### 🔹 [GerenciamentoDados](./GerenciamentoDados)  
+Implementation of a Project Management System for academic projects using Python and SQL.  
+**Technologies:** SQL, Python  
 
 ---
 
-### 🔹 [Site Ercas](./SiteErcas)
-Implementação do site do evento Escola Regional de Computação Aplicada à Saúde 2024.  
-**Tecnologias:** Wordpress  
+### 🔹 [MyFTP](./MyFTP)  
+Implementation of a custom UDP-based FTP protocol in Python with multithreading.  
+**Technologies:** Python, Sockets, Threads  
 
 ---
 
-## 📫 Contato
+### 🔹 [Map Generator AI](./MapGeneratorIA)  
+Procedural 2D map generator for RPG-style games using backtracking algorithms to ensure valid and playable layouts.  
+**Technologies:** Python, Pygame  
+
+---
+
+### 🔹 [ERCAS Website](./SiteErcas)  
+Development of the official website for the *Regional School of Computing Applied to Health – ERCAS 2024*.  
+**Technologies:** WordPress  
+
+---
+
+## 📫 Contact  
 - GitHub: [JoaoHPS06](https://github.com/JoaoHPS06)  
-- LinkedIn: *https://www.linkedin.com/in/jo%C3%A3o-henrique-pedrosa-487263296/*  
-- Email: *joao.2014@hotmail.com.br*  
+- LinkedIn: [João Henrique Pedrosa](https://www.linkedin.com/in/jo%C3%A3o-henrique-pedrosa-487263296/)  
+- Email: joao.2014@hotmail.com.br  
 
 ---
+
+⭐ *Feel free to explore my repositories and connect with me for collaborations, internships, or research opportunities!*  
