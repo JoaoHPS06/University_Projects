@@ -1,102 +1,102 @@
-# Sistema de Gerenciamento de Projetos Acadêmicos
+# Academic Project Management System
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-blue?style=for-the-badge&logo=postgresql)
-![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Finished-green?style=for-the-badge)
 
-## Visão Geral
-Este projeto é um sistema de banco de dados desenvolvido para gerenciar projetos acadêmicos, como Iniciação Científica, Extensão e Monitoria/Tutoria. A aplicação permite o cadastro e a consulta de informações sobre alunos, professores, departamentos, projetos, oportunidades de vagas e financiadores. Esse trabalho foi realizado por mim e outros colegas para a disciplina de Banco de Dados.
+## Overview
+This project is a database system developed to manage academic projects, such as Scientific Initiation, Extension, and Tutoring.  
+The application allows registering and querying information about students, professors, departments, projects, job opportunities, and sponsors.  
+It was developed by me and my colleagues as part of the **Database** course.
 
-O sistema possui uma interface gráfica desenvolvida em Python que se conecta a um banco de dados PostgreSQL para realizar consultas e operações, como listar projetos, inscrever alunos, aprovar candidaturas e visualizar relatórios sobre vagas e contribuições financeiras.
+The system includes a graphical user interface built in Python that connects to a PostgreSQL database to perform queries and operations, such as listing projects, enrolling students, approving applications, and generating reports on vacancies and funding contributions.
 
-## Tecnologias Utilizadas
+## Technologies Used
+* **Programming Language:** Python  
+* **Database:** PostgreSQL  
+* **Graphical User Interface (GUI):** CustomTkinter  
+* **Database Connector:** Psycopg2  
 
-* **Linguagem de Programação:** Python
-* **Banco de Dados:** PostgreSQL
-* **Interface Gráfica (GUI):** CustomTkinter
-* **Conector do Banco:** Psycopg2
+## Database Model
+The project was modeled at three levels of abstraction: conceptual, relational, and physical.
 
-## Modelo do Banco de Dados
+### 1. Conceptual Schema
+The Entity-Relationship (ER) model was designed to represent the main entities of the system and their relationships.  
+Entities include `Student`, `Professor`, `Project`, `Opportunity`, `Department`, `Sponsor`, among others.  
 
-O projeto foi modelado em três níveis de abstração: conceitual, relacional e físico.
+The full diagram is available in the file `Esquema Conceitual.xml`.
 
-### 1. Esquema Conceitual
+### 2. Relational Schema
+From the conceptual model, the relational schema was derived, defining the structure of the tables, their attributes, primary keys, and foreign keys.  
+The main relations (tables) are:
 
-O Modelo Entidade-Relacionamento (MER) foi criado para representar as principais entidades do sistema e como elas se relacionam. As entidades incluem `Aluno`, `Professor`, `Projeto`, `Oportunidade`, `Departamento`, `Financiador`, entre outras.
+* **Student**: Stores student information.  
+* **Professor**: Stores professor data and their department.  
+* **Department**: Institution’s departments.  
+* **Project**: Central table storing all projects, with specializations such as **ExtensionProject**, **Tutoring**, and **ScientificInitiation**.  
+* **Opportunity**: Defines available project vacancies, including **PaidOpportunity**.  
+* **Enrolls**: Associative table that records student enrollment in opportunities.  
+* **Sponsor** and **Contribution**: Manage sponsors and their financial contributions.  
+* **Coordinates**: Associates professors with the projects they coordinate.  
 
-O diagrama completo está disponível no arquivo `Esquema Conceitual.xml`.
+Detailed information is available in the file `Esquema Relacional.pdf`.
 
-### 2. Esquema Relacional
+### 3. Physical Schema
+The physical schema was implemented in PostgreSQL.  
+The file `Esquema Físico - SQL.sql` contains:
+* `CREATE TABLE` commands for all tables.  
+* All integrity constraints (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, `CHECK`).  
+* `INSERT INTO` commands to populate the database with example data, enabling immediate testing.  
 
-A partir do modelo conceitual, foi derivado o esquema relacional, que define a estrutura das tabelas, seus atributos, chaves primárias e estrangeiras. As principais relações (tabelas) são:
+## System Features
+The graphical interface (`system.py`) offers the following features:
 
-* **Aluno**: Armazena dados dos estudantes.
-* **Professor**: Guarda informações dos professores e seu departamento de alocação.
-* **Departamento**: Tabela com os departamentos da instituição.
-* **Projeto**: Tabela central que armazena todos os projetos, com especializações para **ProjetodeExtensao**, **MonitoriaTutoria** e **IniciacaoCient**.
-* **Oportunidade**: Define as vagas disponíveis nos projetos, podendo ser uma **OportunidadeRemunerada**.
-* **Inscreve**: Tabela associativa que registra a inscrição de um aluno em uma oportunidade.
-* **Financiador** e **Contribuicao**: Gerenciam as entidades que financiam os projetos e os valores contribuídos.
-* **Coordena**: Associa os professores que coordenam cada projeto.
+### Queries
+* **List Projects and Professors**: Displays all projects, professors, and departments.  
+* **List Students by Project**: Search by project code to list enrolled students and their status ("Approved" or "Enrolled").  
+* **List Contributions by Sponsor**: Shows all contributions (projects and amounts) of a given sponsor.  
+* **Vacancy Status**: Report showing total vacancies, filled positions, pending enrollments, and remaining spots.  
+* **List Sponsors**: Displays all registered sponsors.  
+* **Search Projects by Professor**: Search projects by professor’s name.  
+* **Search Courses by Department**: Lists all courses for a given department.  
 
-O detalhamento completo pode ser encontrado no arquivo `Esquema Relacional.pdf`.
+### Operations
+* **Approve Student Enrollment**: Changes a student’s status from "Enrolled" to "Approved", recording start and end dates.  
+* **Delete Enrollment**: Removes a student’s enrollment record from a project.  
 
-### 3. Esquema Físico
+## Environment Setup
 
-O esquema físico foi implementado em PostgreSQL. O arquivo `Esquema Físico - SQL.sql` contém:
-* Os comandos `CREATE TABLE` para todas as tabelas.
-* A definição de todas as restrições de integridade, como `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE` e `CHECK`.
-* Comandos `INSERT INTO` para popular o banco de dados com dados de exemplo, permitindo testar as funcionalidades do sistema imediatamente.
+### 1. Requirements
+* Python 3.x installed  
+* PostgreSQL installed and running  
 
-## Funcionalidades do Sistema
+### 2. Database Setup
+1. Create a database on your PostgreSQL server.  
+2. Run the script `Esquema Físico - SQL.sql` to create the tables and populate them with initial data. You can use a client like DBeaver/pgAdmin or the terminal:  
+   ```bash
+   psql -U your_user -d your_database -f "Esquema Físico - SQL.sql"
+   ```
+### 3. Application Setup
 
-A interface gráfica (`system.py`) oferece as seguintes funcionalidades:
+Clone this repository or download the files.
+Create and activate a virtual environment (recommended):
 
-### Consultas
-* **Listar Projetos e Professores**: Exibe todos os projetos, os professores que os coordenam e seus respectivos departamentos.
-* **Listar Alunos por Projeto**: Permite buscar por um projeto (via código) e lista todos os alunos inscritos, indicando o status ("Aprovado" ou "Inscrito").
-* **Listar Contribuições por Financiador**: Exibe todas as contribuições (projetos e valores) de um financiador específico.
-* **Status de Vagas**: Mostra um relatório com o total de vagas, vagas preenchidas, inscrições pendentes e vagas restantes para cada oportunidade.
-* **Listar Financiadores**: Apresenta todos os dados dos financiadores cadastrados.
-* **Buscar Projetos por Professor**: Permite buscar projetos a partir do nome (ou parte do nome) de um professor.
-* **Buscar Disciplinas por Departamento**: Lista as disciplinas de um departamento a partir do nome do mesmo.
-
-### Operações
-* **Aprovar Aluno Inscrito**: Altera o status de um aluno de "Inscrito" para "Aprovado", registrando a data de início e término de sua participação na oportunidade.
-* **Excluir Inscrição**: Remove o registro de inscrição de um aluno em uma oportunidade.
-
-## Configuração do Ambiente
-
-Para executar este projeto, siga os passos abaixo:
-
-### 1. Pré-requisitos
-* Python 3.x instalado.
-* PostgreSQL instalado e em execução.
-
-### 2. Configuração do Banco de Dados
-1.  Crie um banco de dados em seu servidor PostgreSQL
-2.  Execute o script `Esquema Físico - SQL.sql` para criar as tabelas e popular o banco com os dados iniciais. Você pode usar um cliente como o DBeaver/pgAdmin ou a linha de comando:
-    ```bash
-    psql -U seu_usuario -d nome_do_banco -f "Esquema Físico - SQL.sql"
-    ```
-
-### 3. Configuração da Aplicação
-1.  Clone este repositório ou faça o download dos arquivos.
-2.  Crie e ative um ambiente virtual (recomendado):
-    ```bash
+```bash
     python -m venv venv
     # Windows
     venv\Scripts\activate
     # Linux / macOS
     source venv/bin/activate
-    ```
-3.  Instale as dependências a partir do arquivo `requirements.txt`:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  **Ajuste a conexão com o banco**: Abra o arquivo `system.py` e modifique a função `conectar_bd()` com suas credenciais do PostgreSQL (usuário, senha, host, porta e nome do banco, se for diferente de `postgres`).
+```
+Install dependencies from requirements.txt:
 
-    ```python
+```bash
+    pip install -r requirements.txt
+```
+
+Adjust the database connection: Open system.py and edit the conectar_bd() function with your PostgreSQL credentials.
+
+```python
     def conectar_bd():
         try:
             conn = psycopg2.connect(
@@ -108,13 +108,10 @@ Para executar este projeto, siga os passos abaixo:
             )
             return conn
         # ...
-    ```
+```
 
-## Executando a Aplicação
-
-Com o ambiente configurado e o banco de dados ativo, execute o seguinte comando no terminal:
+With the environment set up and the database running, execute the following command in the terminal::
 
 ```bash
-
 python system.py
-
+```
