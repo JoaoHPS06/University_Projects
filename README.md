@@ -9,8 +9,8 @@ The goal of this portfolio is to showcase my **academic** and **practical experi
 
 ## 👨‍💻 About Me  
 - 🎓 Computer Science Undergraduate (6th semester – UFOP)  
-- 💻 Interests: **Software Engineering, Artificial Intelligence, Data Science, and Extended Reality (XR)**  
-- 🌍 Open to **international internship opportunities** to apply and expand my knowledge  
+- 💻 Interests: **Software Engineering, Artificial Intelligence, and Data Science**  
+- 🌍 Open to **global internship opportunities** to apply and expand my knowledge  
 
 ---
 
