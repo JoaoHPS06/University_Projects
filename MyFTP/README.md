@@ -1,30 +1,32 @@
-# MyFTP - Protocolo de Transferência de Arquivos sobre UDP
+# MyFTP - File Transfer Protocol over UDP
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
-![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-green?style=for-the-badge)
 
-Um projeto acadêmico de Redes de Computadores que implementa um protocolo de transferência de arquivos (FTP) simplificado, construído do zero sobre o protocolo UDP, com uma interface gráfica para cliente e servidor.
+An academic Computer Networks project that implements a simplified file transfer protocol (FTP), built from scratch over the UDP protocol, with a graphical interface for both client and server.
 
-## Visão Geral do Projeto
+## Project Overview
 
-O MyFTP foi desenvolvido como trabalho prático para a disciplina de Redes de Computadores. O principal objetivo era construir um sistema cliente-servidor para transferência de arquivos que não utilizasse a confiabilidade do protocolo TCP. Em vez disso, o desafio central foi implementar uma camada de confiabilidade sobre o **UDP (User Datagram Protocol)**, que é inerentemente não confiável e não orientado à conexão.
+MyFTP was developed as a practical assignment for the Computer Networks course.  
+The main goal was to build a client-server system for file transfer without relying on the reliability of the TCP protocol.  
+Instead, the central challenge was to implement a reliability layer on top of **UDP (User Datagram Protocol)**, which is inherently unreliable and connectionless.
 
-O sistema consiste em duas aplicações com interface gráfica (GUI): um servidor capaz de lidar com múltiplos clientes simultaneamente e um cliente que permite ao usuário interagir com o sistema de arquivos remoto.
+The system consists of two graphical applications (GUI): a server capable of handling multiple clients simultaneously and a client that allows the user to interact with the remote file system.
 
-## Principais Funcionalidades
+## Key Features
 
--   **Autenticação de Usuário:** Sistema de login com validação de credenciais no servidor.
--   **Navegação no Sistema de Arquivos Remoto:** Comandos `ls`, `cd`, `cd ..` e um botão para voltar à raiz.
--   **Manipulação de Diretórios:** Criação (`mkdir`) e remoção (`rmdir`) de pastas no servidor.
--   **Transferência de Arquivos Bidirecional:**
-    -   **Upload (`put`):** Envio de arquivos do cliente para o servidor através de um botão de seleção ou da funcionalidade de arrastar e soltar (Drag and Drop).
-    -   **Download (`get`):** Download de arquivos do servidor para o cliente.
--   **Interface Gráfica Intuitiva:** Tanto o cliente quanto o servidor possuem interfaces gráficas construídas com Tkinter, facilitando a interação e o monitoramento.
--   **Suporte Multiplataforma:** O sistema é compatível com Windows, macOS e Linux.
+- **User Authentication:** Login system with credential validation on the server.  
+- **Remote File System Navigation:** Commands `ls`, `cd`, `cd ..`, and a button to return to the root directory.  
+- **Directory Management:** Create (`mkdir`) and remove (`rmdir`) folders on the server.  
+- **Bidirectional File Transfer:**  
+  - **Upload (`put`):** Send files from the client to the server through a file selection button or drag-and-drop functionality.  
+  - **Download (`get`):** Retrieve files from the server to the client.  
+- **Intuitive Graphical Interface:** Both client and server include graphical interfaces built with Tkinter, making interaction and monitoring easier.  
+- **Cross-Platform Support:** Compatible with Windows, macOS, and Linux.  
 
-## Tecnologias Utilizadas
+## Technologies Used
 
--   **Linguagem:** Python 3
--   **Rede:** Biblioteca `socket` para comunicação UDP.
--   **Interface Gráfica (GUI):** `Tkinter` (com `ttk` para um visual aprimorado) e `TkinterDnD2` para a funcionalidade de arrastar e soltar.
--   **Concorrência:** Biblioteca `threading`.
+- **Language:** Python 3  
+- **Networking:** `socket` library for UDP communication.  
+- **Graphical Interface (GUI):** `Tkinter` (with `ttk` for enhanced styling) and `TkinterDnD2` for drag-and-drop functionality.  
+- **Concurrency:** `threading` library.  
