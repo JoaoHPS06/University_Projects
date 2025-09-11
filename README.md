@@ -28,15 +28,15 @@ Implementation of a Project Management System for academic projects using Python
 
 ---
 
-### 🔹 [MyFTP](./MyFTP)  
-Implementation of a custom UDP-based FTP protocol in Python with multithreading.  
-**Technologies:** Python, Sockets, Threads  
-
----
-
 ### 🔹 [Map Generator AI](./MapGeneratorIA)  
 Procedural 2D map generator for RPG-style games using backtracking algorithms to ensure valid and playable layouts.  
 **Technologies:** Python, Pygame  
+
+---
+
+### 🔹 [MyFTP](./MyFTP)  
+Implementation of a custom UDP-based FTP protocol in Python with multithreading.  
+**Technologies:** Python, Sockets, Threads  
 
 ---
 
