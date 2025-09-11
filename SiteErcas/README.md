@@ -1,54 +1,54 @@
-# 🌐 Site do Evento ERCAS 2024
+# 🌐 ERCAS 2024 Event Website
 
 ![WordPress](https://img.shields.io/badge/WordPress-6.5%2B-21759B?style=for-the-badge&logo=wordpress)
-![Status](https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-green?style=for-the-badge)
 
-Repositório de apresentação do site desenvolvido para a **IX edição da Escola Regional de Computação Aplicada à Saúde (ERCAS)**, realizada em 2024 pela Universidade Federal de Ouro Preto (UFOP) e Sociedade Brasileira de Computação (SBC).
+Presentation repository of the website developed for the **IX Edition of the Regional School of Applied Computing to Health (ERCAS)**, held in 2024 by the Federal University of Ouro Preto (UFOP) and the Brazilian Computer Society (SBC).
 
-O site foi criado com WordPress, contando com um layout institucional limpo, intuitivo e responsivo. Este projeto foi desenvolvido em equipe por estudantes da UFOP, responsáveis pela estruturação, design e configuração do conteúdo.
+The website was built with WordPress, featuring a clean, intuitive, and responsive institutional layout. This project was developed collaboratively by UFOP students, responsible for structuring, designing, and configuring the content.
 
-## 🧠 Sobre o evento
+## 🧠 About the Event
 
-A **Escola Regional de Computação Aplicada à Saúde (ERCAS)** é promovida pela Sociedade Brasileira de Computação (SBC) com a missão de divulgar, debater e promover abordagens computacionais no contexto da saúde.
+The **Regional School of Applied Computing to Health (ERCAS)** is promoted by the Brazilian Computer Society (SBC) with the mission of disseminating, discussing, and promoting computational approaches in the healthcare context.
 
-Desde sua criação em 2013, o evento busca integrar profissionais e estudantes de diversas áreas como Computação, Medicina, Farmácia, Estatística, Biotecnologia, entre outras, promovendo colaborações multidisciplinares. Em 2024, o evento aconteceu pela primeira vez em Minas Gerais, na cidade de Ouro Preto.
+Since its creation in 2013, the event has aimed to integrate professionals and students from various fields such as Computer Science, Medicine, Pharmacy, Statistics, Biotechnology, among others, fostering multidisciplinary collaboration.  
+In 2024, the event took place for the first time in Minas Gerais, in the city of Ouro Preto.
 
-## 🔨 Tecnologias e ferramentas utilizadas
+## 🔨 Technologies and Tools Used
 
 - **WordPress**
-- Tema: Creatio 2 
-- **Plugins utilizados**:
+- Theme: Creatio 2
+- **Plugins used**:
   - All-in-One WP Migration
   - Malcare
   - WP-Optimize
   - MetaSlider
   - Site Kit by Google
-- **Google Maps API** (para exibir o local do evento)
+- **Google Maps API** (to display the event location)
 
-## 💼 Minhas contribuições
+## 💼 My Contributions
 
-- Estruturação e organização das páginas principais
-- Colaboração no design e layout das seções
-- Inserção e organização dos conteúdos do evento (programação, palestras, minicursos)
-- Configuração e otimização de plugins
-- Apoio na integração com a API do Google Maps
+- Structuring and organizing the main pages  
+- Collaborating on section design and layout  
+- Inserting and organizing event content (schedule, talks, workshops)  
+- Configuring and optimizing plugins  
+- Supporting Google Maps API integration  
 
-## 📸 Galeria de imagens
+## 📸 Image Gallery
 
-> 🔍 As imagens completas estão disponíveis na pasta [screenshots/](./screenshots)
+> 🔍 Full images are available in the [screenshots/](./screenshots) folder.
 
-## 🌍 Link do site
+## 🌍 Website Link
 
-> 🔗 [Acessar site ERCAS 2024](https://www2.decom.ufop.br/ercas2024/) 
+> 🔗 [Access ERCAS 2024 Website](https://www2.decom.ufop.br/ercas2024/)  
 
-## 💾 Backup completo
+## 💾 Full Backup
 
-O site pode ser exportado/restaurado usando o plugin **All-in-One WP Migration**.  
-Caso deseje restaurar o projeto:
+The website can be exported/restored using the **All-in-One WP Migration** plugin.  
+To restore the project:
 
-1. Instale uma instância WordPress limpa.
-2. Instale o plugin All-in-One WP Migration.
-3. Importe o arquivo `.wpress` disponibilizado abaixo.
+1. Install a fresh WordPress instance.  
+2. Install the All-in-One WP Migration plugin.  
+3. Import the `.wpress` file provided below.  
 
-🔗 [Download do arquivo zip `.wpress`](https://drive.google.com/file/d/1pBsZaiJlSZWvrdGtXuoivNxFR2to_NRe/view?usp=drive_link) 
-
+🔗 [Download `.wpress` zip file](https://drive.google.com/file/d/1pBsZaiJlSZWvrdGtXuoivNxFR2to_NRe/view?usp=drive_link)  
