@@ -72,9 +72,3 @@ The code was modularized to ensure organization and clarity by separating respon
     ```bash
     ./sumplete
     ```
-
-## Project Evolution
-
-The core logic developed in this C project served as the foundation for a more advanced version featuring a graphical user interface, developed in C++ with the Qt framework. You can see the evolution of this work in my personal projects repository.
-
-➡️ **Check out the C++/Qt version here: SOON**
