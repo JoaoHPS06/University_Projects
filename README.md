@@ -46,6 +46,12 @@ Development of the official website for the *Regional School of Computing Applie
 
 ---
 
+### 🔹 [Sumplete](./Sumplete)  
+Terminal-based implementation of the logic puzzle game Sumplete, applying fundamental concepts of memory management and file manipulation.
+**Technologies:** C  
+
+---
+
 ## 📫 Contact  
 - GitHub: [JoaoHPS06](https://github.com/JoaoHPS06)  
 - LinkedIn: [João Henrique Pedrosa](https://www.linkedin.com/in/jo%C3%A3o-henrique-pedrosa-487263296/)  
