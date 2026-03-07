@@ -32,6 +32,12 @@ Implementation of a custom UDP-based FTP protocol in Python with multithreading.
 
 ---
 
+### 🔹 [SyncStore](./SyncStore)
+Distributed system implementing Ricart-Agrawala mutual exclusion and Primary-Backup replication across two clusters — Sync and Store — with automatic fault detection, leader election, and a real-time monitoring dashboard.
+**Technologies:** Python, Docker, Sockets, Threads
+
+---
+
 ### 🔹 [ERCAS Website](./SiteErcas)
 Development of the official website for the *Regional School of Computing Applied to Health – ERCAS 2024*.
 **Technologies:** WordPress
