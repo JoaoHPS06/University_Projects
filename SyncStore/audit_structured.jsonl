@@ -1,0 +1,2 @@
+{"ts": 1772892348.8048, "time": "11:05:48.804", "node_type": "STORE", "node_id": 1, "event": "NODE_DOWN", "msg": "Store2 n\u00e3o responde ao PING \u2014 marcado como morto", "data": {"dead_id": 2}}
+{"ts": 1772892348.8184714, "time": "11:05:48.818", "node_type": "STORE", "node_id": 1, "event": "NODE_DOWN", "msg": "Store3 n\u00e3o responde ao PING \u2014 marcado como morto", "data": {"dead_id": 3}}

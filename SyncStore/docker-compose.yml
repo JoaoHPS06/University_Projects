@@ -1,0 +1,192 @@
+version: '3.8'
+
+services:
+
+  # ============================================================
+  # AUDITOR DE LOGS (mantido do TP2, agora apenas para auditoria)
+  # ============================================================
+  resource_server:
+    build: .
+    container_name: resource_server
+    command: python resource_server.py
+    ports: ["6000:6000"]
+    volumes: [".:/app"]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  # ============================================================
+  # LOG SERVER — expõe audit_structured.jsonl via HTTP para o dashboard
+  # Abra dashboard.html no navegador após subir o sistema
+  # ============================================================
+  log_server:
+    build: .
+    container_name: log_server
+    command: python log_server.py
+    volumes: [".:/app"]
+    ports: ["8888:8888"]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  # ============================================================
+  # CLUSTER STORE — 3 nós (Protocolo 1: Primário fixo + Backups)
+  # store1 começa como primário (menor ID).
+  # Se cair, store2 assume. Se store2 cair, store3 assume.
+  # ============================================================
+  store1:
+    build: .
+    container_name: store1
+    command: python store_node.py 1
+    volumes: [".:/app"]
+    ports: ["7001:7001"]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  store2:
+    build: .
+    container_name: store2
+    command: python store_node.py 2
+    volumes: [".:/app"]
+    ports: ["7002:7002"]
+    depends_on: [store1]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  store3:
+    build: .
+    container_name: store3
+    command: python store_node.py 3
+    volumes: [".:/app"]
+    ports: ["7003:7003"]
+    depends_on: [store1]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  # ============================================================
+  # CLUSTER SYNC — 5 nós (Ricart-Agrawala, TP2 base)
+  # ============================================================
+  node1:
+    build: .
+    container_name: node1
+    command: python node_cluster.py 1
+    volumes: [".:/app"]
+    depends_on: [resource_server, store1, store2, store3]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  node2:
+    build: .
+    container_name: node2
+    command: python node_cluster.py 2
+    volumes: [".:/app"]
+    depends_on: [resource_server, store1, store2, store3]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  node3:
+    build: .
+    container_name: node3
+    command: python node_cluster.py 3
+    volumes: [".:/app"]
+    depends_on: [resource_server, store1, store2, store3]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  node4:
+    build: .
+    container_name: node4
+    command: python node_cluster.py 4
+    volumes: [".:/app"]
+    depends_on: [resource_server, store1, store2, store3]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  node5:
+    build: .
+    container_name: node5
+    command: python node_cluster.py 5
+    volumes: [".:/app"]
+    depends_on: [resource_server, store1, store2, store3]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  # ============================================================
+  # CLIENTES (idênticos ao TP2)
+  # ============================================================
+  client1:
+    build: .
+    container_name: client1
+    command: python client.py Cliente_A 1
+    volumes: [".:/app"]
+    depends_on: [node1, node2, node3, node4, node5]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  client2:
+    build: .
+    container_name: client2
+    command: python client.py Cliente_B 2
+    volumes: [".:/app"]
+    depends_on: [node1, node2, node3, node4, node5]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  client3:
+    build: .
+    container_name: client3
+    command: python client.py Cliente_C 3
+    volumes: [".:/app"]
+    depends_on: [node1, node2, node3, node4, node5]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  client4:
+    build: .
+    container_name: client4
+    command: python client.py Cliente_D 4
+    volumes: [".:/app"]
+    depends_on: [node1, node2, node3, node4, node5]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+  client5:
+    build: .
+    container_name: client5
+    command: python client.py Cliente_E 5
+    volumes: [".:/app"]
+    depends_on: [node1, node2, node3, node4, node5]
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tp3_net
+
+networks:
+  tp3_net:
+    driver: bridge

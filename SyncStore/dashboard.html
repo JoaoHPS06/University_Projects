@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>TP3 — Monitor de Sistema Distribuído</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;900&display=swap');
+
+  :root {
+    --bg:       #070b10;
+    --bg2:      #0c1118;
+    --bg3:      #111820;
+    --border:   #1a2a1a;
+    --green:    #00e676;
+    --green2:   #00c853;
+    --blue:     #40c4ff;
+    --yellow:   #ffd740;
+    --red:      #ff5252;
+    --orange:   #ff9100;
+    --cyan:     #18ffff;
+    --gray:     #546e7a;
+    --text:     #b0bec5;
+    --font:     'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 12px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    flex-shrink: 0;
+  }
+
+  header h1 {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--green);
+    text-transform: uppercase;
+  }
+
+  header .subtitle { color: #2e4a2e; font-size: 10px; margin-top: 2px; letter-spacing: 1px; }
+
+  .live-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; letter-spacing: 1px;
+  }
+
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 1.5s infinite;
+  }
+  .dot.offline { background: var(--red); box-shadow: 0 0 8px var(--red); animation: none; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  /* ── Stats bar ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .stat {
+    background: var(--bg2);
+    padding: 10px 16px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+
+  .stat-label { color: var(--gray); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .stat-value { font-size: 24px; font-weight: 900; }
+  .stat-sub   { color: var(--gray); font-size: 9px; }
+
+  /* ── Main layout ── */
+  .main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    flex: 1;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── Left panel ── */
+  .left {
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .panel-title {
+    color: #2e4a2e;
+    font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* Node cards */
+  .node-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .node-card {
+    background: var(--bg3);
+    border: 1.5px solid #1a2a1a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 78px;
+    text-align: center;
+    transition: all .35s;
+  }
+  .node-card.active {
+    border-color: var(--green);
+    background: #00e67611;
+    box-shadow: 0 0 14px #00e67622;
+  }
+  .node-card.dead {
+    border-color: var(--red);
+    background: #ff525211;
+  }
+  .node-card.primary {
+    border-color: var(--yellow);
+    background: #ffd74011;
+    box-shadow: 0 0 12px #ffd74022;
+  }
+
+  .node-name { font-weight: 700; font-size: 12px; }
+  .node-role { font-size: 9px; margin-top: 2px; }
+
+  /* Election log */
+  .election-list { display: flex; flex-direction: column; gap: 4px; }
+  .election-item { color: var(--yellow); font-size: 10px; }
+  .election-empty { color: #2a3a2a; font-size: 10px; }
+
+  /* ── Timeline ── */
+  .right {
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  .timeline-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    flex-shrink: 0;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid #1a2a1a;
+    color: var(--gray);
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 10px;
+    transition: all .2s;
+  }
+  .filter-btn.active {
+    background: #00e67618;
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .event-count { margin-left: auto; color: #2a3a2a; font-size: 10px; }
+
+  .timeline {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+
+  .event-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 4px 14px;
+    border-radius: 4px;
+    transition: background .4s;
+  }
+  .event-row.new { background: #00e67608; }
+
+  .ev-time  { color: #2a3a2a; font-size: 10px; white-space: nowrap; padding-top: 1px; min-width: 85px; }
+  .ev-node  {
+    font-size: 10px; font-weight: 700;
+    padding: 1px 6px; border-radius: 4px;
+    white-space: nowrap;
+    min-width: 60px; text-align: center;
+  }
+  .ev-node.SYNC  { background: #40c4ff18; color: var(--blue); border: 1px solid #40c4ff33; }
+  .ev-node.STORE { background: #00e67618; color: var(--green); border: 1px solid #00e67633; }
+
+  .ev-badge {
+    font-size: 9px; font-weight: 700;
+    padding: 1px 6px; border-radius: 3px;
+    white-space: nowrap;
+    letter-spacing: .5px;
+  }
+  .ev-msg { color: #78909c; font-size: 10px; flex: 1; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #1a2a1a; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>TP3 — Distributed System Monitor</h1>
+    <div class="subtitle">Protocolo 1 (Primário-Backup) + Ricart-Agrawala + Fault Tolerance</div>
+  </div>
+  <div class="live-badge">
+    <div class="dot" id="liveDot"></div>
+    <span id="liveLabel" style="color:var(--green)">AO VIVO</span>
+    &nbsp;·&nbsp;
+    <span id="lastUpdate" style="color:var(--gray)">—</span>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-label">Escritas OK</div>
+    <div class="stat-value" id="statWrites" style="color:var(--green)">0</div>
+    <div class="stat-sub">WRITE_OK confirmados</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Entradas SC</div>
+    <div class="stat-value" id="statSC" style="color:var(--blue)">0</div>
+    <div class="stat-sub">Seção crítica acessada</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Postergamentos</div>
+    <div class="stat-value" id="statDefer" style="color:var(--orange)">0</div>
+    <div class="stat-sub">RA_DEFERRED</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Falhas</div>
+    <div class="stat-value" id="statDown" style="color:var(--red)">0</div>
+    <div class="stat-sub">NODE_DOWN detectados</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Eleições</div>
+    <div class="stat-value" id="statElec" style="color:var(--yellow)">0</div>
+    <div class="stat-sub">Eleições concluídas</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- Left panel -->
+  <div class="left">
+
+    <div>
+      <div class="panel-title">Cluster Sync</div>
+      <div class="node-grid" id="syncNodes"></div>
+    </div>
+
+    <div>
+      <div class="panel-title">Cluster Store</div>
+      <div class="node-grid" id="storeNodes"></div>
+    </div>
+
+    <div>
+      <div class="panel-title">Eleições Recentes</div>
+      <div class="election-list" id="electionList">
+        <div class="election-empty">Nenhuma eleição ainda</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-title">Writes por Nó Sync</div>
+      <div id="writesByNode" style="display:flex;flex-direction:column;gap:5px;"></div>
+    </div>
+
+  </div>
+
+  <!-- Timeline -->
+  <div class="right">
+    <div class="timeline-header">
+      <span style="color:var(--gray);font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-right:4px">Filtro:</span>
+      <button class="filter-btn active" onclick="setFilter('ALL')">ALL</button>
+      <button class="filter-btn" onclick="setFilter('SYNC')">SYNC</button>
+      <button class="filter-btn" onclick="setFilter('STORE')">STORE</button>
+      <button class="filter-btn" onclick="setFilter('FAULT')">FALHAS</button>
+      <button class="filter-btn" onclick="setFilter('ELECTION')">ELEIÇÃO</button>
+      <button class="filter-btn" onclick="setFilter('SC')">SEÇÃO CRÍTICA</button>
+      <span class="event-count" id="evCount">0 eventos</span>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+</div>
+
+<script>
+// ─── Config ───────────────────────────────────────────────────────────────
+const API       = "http://localhost:8888/events";
+const POLL_MS   = 1500;
+const MAX_ROWS  = 300;
+
+// ─── State ────────────────────────────────────────────────────────────────
+let allEvents   = [];
+let lastTs      = 0;
+let currentFilter = "ALL";
+let connected   = false;
+
+// Node state derived from events
+const syncState  = {}; // {id: 'idle'|'wanted'|'held'}
+const storeState = {}; // {id: 'primary'|'backup'|'dead'}
+for (let i = 1; i <= 5; i++) syncState[i]  = 'idle';
+for (let i = 1; i <= 3; i++) storeState[i] = i === 1 ? 'primary' : 'backup';
+
+// Per-sync write counts
+const writeCounts = {1:0, 2:0, 3:0, 4:0, 5:0};
+
+// ─── Event colors ─────────────────────────────────────────────────────────
+const EVENT_COLORS = {
+  CLIENT_REQUEST:    ['#ff9100','#ff910022'],
+  CRITICAL_ENTER:    ['#00e676','#00e67622'],
+  CRITICAL_EXIT:     ['#00c853','#00c85322'],
+  RA_REQUEST_SENT:   ['#40c4ff','#40c4ff22'],
+  RA_DEFERRED:       ['#ff5252','#ff525222'],
+  RA_APPROVED:       ['#ffd740','#ffd74022'],
+  RA_OK_RECEIVED:    ['#18ffff','#18ffff18'],
+  STORE_WRITE_OK:    ['#00e676','#00e67622'],
+  STORE_WRITE_FAIL:  ['#ff5252','#ff525222'],
+  STORE_EXHAUSTED:   ['#ff1744','#ff174422'],
+  STORE_REDIRECT:    ['#ff9100','#ff910022'],
+  WRITE_PRIMARY:     ['#00e676','#00e67618'],
+  WRITE_REPLICA:     ['#18ffff','#18ffff18'],
+  WRITE_OK:          ['#00e676','#00e67622'],
+  REPLICA_FAIL:      ['#ff5252','#ff525222'],
+  REDIRECT_SENT:     ['#ff9100','#ff910022'],
+  NODE_DOWN:         ['#ff1744','#ff174433'],
+  NODE_UP:           ['#00e676','#00e67622'],
+  ELECTION_START:    ['#ffd740','#ffd74022'],
+  ELECTION_DONE:     ['#ffd740','#ffd74033'],
+  DUPLICATE_IGNORED: ['#ff9100','#ff910022'],
+};
+
+// ─── Filter logic ─────────────────────────────────────────────────────────
+const FILTER_EVENTS = {
+  ALL:      null,
+  SYNC:     e => e.node_type === 'SYNC',
+  STORE:    e => e.node_type === 'STORE',
+  FAULT:    e => ['NODE_DOWN','STORE_WRITE_FAIL','REPLICA_FAIL','STORE_EXHAUSTED'].includes(e.event),
+  ELECTION: e => ['ELECTION_START','ELECTION_DONE','NODE_DOWN','NODE_UP'].includes(e.event),
+  SC:       e => ['CRITICAL_ENTER','CRITICAL_EXIT','RA_REQUEST_SENT','RA_DEFERRED','RA_APPROVED'].includes(e.event),
+};
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === f ||
+      (f==='ALL' && b.textContent.trim()==='ALL') ||
+      (f==='FAULT' && b.textContent.trim()==='FALHAS') ||
+      (f==='ELECTION' && b.textContent.trim()==='ELEIÇÃO') ||
+      (f==='SC' && b.textContent.trim()==='SEÇÃO CRÍTICA'));
+  });
+  renderTimeline();
+}
+
+// ─── State recompute ──────────────────────────────────────────────────────
+// Recomputes the FULL cluster state by replaying all events in order.
+// This avoids stale "dead" states from startup pings that fired before
+// nodes were ready, and correctly handles recovery after NODE_UP.
+function recomputeState() {
+  // Reset to defaults
+  for (let i = 1; i <= 5; i++) syncState[i]  = 'idle';
+  for (let i = 1; i <= 3; i++) storeState[i] = i === 1 ? 'primary' : 'backup';
+  for (let i = 1; i <= 5; i++) writeCounts[i] = 0;
+
+  // Track per-store: last seen event timestamp for NODE_DOWN vs NODE_UP
+  // A node is only "dead" if its most recent status event is NODE_DOWN
+  // AND there's been no ELECTION_DONE that includes it as primary/backup
+  const storeLastStatus = {}; // {storeId: {event, ts}}
+
+  for (const e of allEvents) {
+    const id = e.node_id;
+
+    if (e.node_type === 'SYNC') {
+      if (e.event === 'CRITICAL_ENTER')  syncState[id] = 'held';
+      if (e.event === 'CRITICAL_EXIT')   syncState[id] = 'idle';
+      if (e.event === 'RA_REQUEST_SENT') syncState[id] = 'wanted';
+      if (e.event === 'STORE_WRITE_OK')  writeCounts[id] = (writeCounts[id]||0) + 1;
+    }
+
+    if (e.node_type === 'STORE') {
+      if (e.event === 'NODE_DOWN') {
+        const dead = e.data.dead_id;
+        if (!storeLastStatus[dead] || e.ts > storeLastStatus[dead].ts)
+          storeLastStatus[dead] = { event: 'NODE_DOWN', ts: e.ts };
+      }
+      if (e.event === 'NODE_UP') {
+        const rec = e.data.recovered_id;
+        if (!storeLastStatus[rec] || e.ts > storeLastStatus[rec].ts)
+          storeLastStatus[rec] = { event: 'NODE_UP', ts: e.ts };
+      }
+      if (e.event === 'ELECTION_DONE') {
+        const np = e.data.new_primary;
+        // After an election, the new primary is alive by definition
+        for (let i = 1; i <= 3; i++) {
+          if (!storeLastStatus[i] || e.ts > storeLastStatus[i].ts) {
+            // Only update if this node participated (alive nodes get a role)
+            // The emitting node knows its own role
+            if (e.node_id === i) {
+              storeLastStatus[i] = { event: 'NODE_UP', ts: e.ts };
+            }
+          }
+        }
+        // The new primary is definitely alive
+        if (!storeLastStatus[np] || e.ts > storeLastStatus[np].ts)
+          storeLastStatus[np] = { event: 'NODE_UP', ts: e.ts };
+      }
+    }
+  }
+
+  // Apply final store states
+  for (let i = 1; i <= 3; i++) {
+    const s = storeLastStatus[i];
+    if (s && s.event === 'NODE_DOWN') {
+      storeState[i] = 'dead';
+    }
+    // else: keep the role derived from ELECTION_DONE or default
+  }
+
+  // Apply primary from last ELECTION_DONE
+  const elections = allEvents.filter(e => e.event === 'ELECTION_DONE');
+  if (elections.length > 0) {
+    const last = elections[elections.length - 1];
+    const np = last.data.new_primary;
+    for (let i = 1; i <= 3; i++) {
+      if (storeState[i] !== 'dead')
+        storeState[i] = i === np ? 'primary' : 'backup';
+    }
+  }
+}
+
+// ─── Render helpers ───────────────────────────────────────────────────────
+function renderNodePanels() {
+  // Sync
+  const sg = document.getElementById('syncNodes');
+  sg.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const s = syncState[i];
+    const card = document.createElement('div');
+    card.className = 'node-card' + (s === 'held' ? ' active' : '');
+    const color = s === 'held' ? '#00e676' : s === 'wanted' ? '#ffd740' : '#546e7a';
+    const role  = s === 'held' ? '⚡ NA SC' : s === 'wanted' ? '⏳ WAITING' : 'idle';
+    card.innerHTML = `<div class="node-name" style="color:${color}">SYNC${i}</div>
+                      <div class="node-role" style="color:${color}">${role}</div>`;
+    sg.appendChild(card);
+  }
+
+  // Store
+  const stg = document.getElementById('storeNodes');
+  stg.innerHTML = '';
+  for (let i = 1; i <= 3; i++) {
+    const s = storeState[i];
+    const card = document.createElement('div');
+    card.className = 'node-card' + (s === 'dead' ? ' dead' : s === 'primary' ? ' primary' : '');
+    const color = s === 'dead' ? '#ff5252' : s === 'primary' ? '#ffd740' : '#00e676';
+    const role  = s === 'dead' ? '💀 MORTO' : s === 'primary' ? '👑 PRIMÁRIO' : 'backup';
+    card.innerHTML = `<div class="node-name" style="color:${color}">STORE${i}</div>
+                      <div class="node-role" style="color:${color}">${role}</div>`;
+    stg.appendChild(card);
+  }
+}
+
+function renderStats() {
+  document.getElementById('statWrites').textContent =
+    allEvents.filter(e => e.event === 'WRITE_OK').length;
+  document.getElementById('statSC').textContent =
+    allEvents.filter(e => e.event === 'CRITICAL_ENTER').length;
+  document.getElementById('statDefer').textContent =
+    allEvents.filter(e => e.event === 'RA_DEFERRED').length;
+  document.getElementById('statDown').textContent =
+    allEvents.filter(e => e.event === 'NODE_DOWN').length;
+  document.getElementById('statElec').textContent =
+    allEvents.filter(e => e.event === 'ELECTION_DONE').length;
+}
+
+function renderElections() {
+  const elections = allEvents.filter(e => e.event === 'ELECTION_DONE').slice(-5).reverse();
+  const el = document.getElementById('electionList');
+  if (!elections.length) {
+    el.innerHTML = '<div class="election-empty">Nenhuma eleição ainda</div>';
+    return;
+  }
+  el.innerHTML = elections.map(e =>
+    `<div class="election-item">${e.time} → Store${e.data.new_primary} assumiu</div>`
+  ).join('');
+}
+
+function renderWritesByNode() {
+  const container = document.getElementById('writesByNode');
+  const max = Math.max(1, ...Object.values(writeCounts));
+  container.innerHTML = Object.entries(writeCounts).map(([id, count]) => `
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span style="color:var(--blue);min-width:52px;font-size:10px">SYNC${id}</span>
+      <div style="flex:1;background:#111820;border-radius:2px;height:10px;overflow:hidden">
+        <div style="width:${(count/max)*100}%;background:var(--blue);height:100%;transition:width .5s;opacity:.7"></div>
+      </div>
+      <span style="color:var(--gray);min-width:20px;text-align:right;font-size:10px">${count}</span>
+    </div>
+  `).join('');
+}
+
+function renderTimeline() {
+  const fn = FILTER_EVENTS[currentFilter];
+  const filtered = fn ? allEvents.filter(fn) : allEvents;
+  document.getElementById('evCount').textContent = `${filtered.length} eventos`;
+
+  const tl = document.getElementById('timeline');
+  const atBottom = tl.scrollHeight - tl.scrollTop - tl.clientHeight < 60;
+
+  // Build rows
+  const rows = filtered.slice(-MAX_ROWS).map((e, i, arr) => {
+    const isNew  = i >= arr.length - 5;
+    const [ec, ebg] = EVENT_COLORS[e.event] || ['#546e7a','#546e7a18'];
+    return `
+      <div class="event-row${isNew?' new':''}">
+        <span class="ev-time">${e.time}</span>
+        <span class="ev-node ${e.node_type}">${e.node_type}${e.node_id}</span>
+        <span class="ev-badge" style="background:${ebg};color:${ec};border:1px solid ${ec}44">${e.event}</span>
+        <span class="ev-msg">${e.msg}</span>
+      </div>`;
+  }).join('');
+
+  tl.innerHTML = rows;
+  if (atBottom) tl.scrollTop = tl.scrollHeight;
+}
+
+// ─── Polling ──────────────────────────────────────────────────────────────
+async function poll() {
+  try {
+    const url  = lastTs > 0 ? `${API}?since=${lastTs}` : API;
+    const resp = await fetch(url);
+    const news = await resp.json();
+
+    if (!connected) {
+      connected = true;
+      document.getElementById('liveDot').classList.remove('offline');
+      document.getElementById('liveLabel').style.color = 'var(--green)';
+      document.getElementById('liveLabel').textContent = 'AO VIVO';
+    }
+
+    if (news.length > 0) {
+      news.forEach(e => { allEvents.push(e); });
+      lastTs = allEvents[allEvents.length - 1].ts;
+      recomputeState();
+      renderNodePanels();
+      renderStats();
+      renderElections();
+      renderWritesByNode();
+      renderTimeline();
+    }
+
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent =
+      now.toLocaleTimeString('pt-BR') + '.' + String(now.getMilliseconds()).padStart(3,'0');
+
+  } catch (err) {
+    connected = false;
+    document.getElementById('liveDot').classList.add('offline');
+    document.getElementById('liveLabel').style.color = 'var(--red)';
+    document.getElementById('liveLabel').textContent = 'OFFLINE';
+    document.getElementById('lastUpdate').textContent = 'sem conexão com log_server';
+  }
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────
+renderNodePanels();
+renderWritesByNode();
+poll();
+setInterval(poll, POLL_MS);
+</script>
+</body>
+</html>
