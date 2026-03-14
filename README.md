@@ -32,12 +32,6 @@ Implementation of a custom UDP-based FTP protocol in Python with multithreading.
 
 ---
 
-### 🔹 [ERCAS Website](./SiteErcas)
-Development of the official website for the *Regional School of Computing Applied to Health – ERCAS 2024*.
-**Technologies:** WordPress
-
----
-
 ### 🔹 [Sumplete](./Sumplete)
 Terminal-based implementation of the logic puzzle game Sumplete, applying fundamental concepts of memory management and file manipulation.
 **Technologies:** C
